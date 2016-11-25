@@ -45,12 +45,14 @@ public class FracCalc {
 		// Int[] = operandOne = describeOperand(operandOne)
 		// Int[] operandTwo = describeOperand(operandTwo)
 		
-		int[] operandOneDescribed = describeOperand(operandOne);
+//		int[] operandOneDescribed = describeOperand(operandOne);
+		operandTwo = describeOperand(operandTwo);
 		
         return operandTwo;
     }
     
-    public static int[] describeOperand(String input) {
+//    public static int[] describeOperand(String input) {
+      public static String describeOperand(String input) {
 		int whole = 0;
 		int numerator = 0;
 		int denominator = 0;
@@ -80,8 +82,15 @@ public class FracCalc {
 			denominator = 1;
 		}
 		
-		return [whole, numerator, denominator];
-//		return "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
+		// wrap the values in a tight little cozy container
+		// ...with a little bow on top
+		int[] result = new int[3];
+		result[0] = whole;
+		result[1] = numerator;
+		result[2] = denominator;
+		
+//		return result;
+		return "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
