@@ -2,7 +2,7 @@ package fracCalc;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class FracCalc {
+public class checkpoint2 {
 
     public static void main(String[] args) 
     {
