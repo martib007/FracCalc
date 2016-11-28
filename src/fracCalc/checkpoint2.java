@@ -80,6 +80,12 @@ public class checkpoint2 {
 			denominator = 1;
 		}
 		
+		if (whole < 0)
+		{
+			numerator = numerator * -1;
+			denominator = denominator * -1;
+		}
+		
 		return "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
     }
 
