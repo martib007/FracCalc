@@ -17,6 +17,7 @@ public class FracCalc {
 			System.out.println (answer);
 			statement = in.nextLine();
 		}
+		System.out.println("Goodbye");
     }
     
     // 'whole:0 numerator:27 demominator:21'
@@ -32,27 +33,52 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input)
     { 
-        // TODO: Implement this function to produce the solution to the input
 		// 1/4 + 1_1/2 => ["1/4", "+", "1_1/2"]
 		String[] splitInput = input.split(" ");
-//		System.out.println (Arrays.toString(splitInput));
 		
 		String operandOne = splitInput[0]; // 1/4
 		String operator = splitInput[1]; // +, -, *, /
 		String operandTwo = splitInput[2]; // 1_1/2
+
+		String anwser = calculcateEquation(operandOne, operator, operandTwo);
 		
-		// TODO
-		// Int[] = operandOne = describeOperand(operandOne)
-		// Int[] operandTwo = describeOperand(operandTwo)
-		
-//		int[] operandOneDescribed = describeOperand(operandOne);
-		operandTwo = describeOperand(operandTwo);
-		
-        return operandTwo;
+        return anwser;
     }
     
-//    public static int[] describeOperand(String input) {
-      public static String describeOperand(String input) {
+    /**
+     * Evaluates a given formula 
+     * @param operandOne a fraction or mixed fraction
+     * @param operator +, -, *, /
+     * @param operandTwo a fraction or mixed fraction
+     * @return
+     */
+    public static String calculcateEquation(String operandOne, String operator, String operandTwo) {
+    	
+    	// parsed operands, from string to parsed values
+		int[] operandOneDescribed = describeOperand(operandOne);
+		int[] operandTwoDescribed = describeOperand(operandTwo);
+		
+		if (operator.equals("+")) {
+			// sum up the operands
+		} else if (operator.equals("-")) {
+			// find the difference between the operands
+		} else if (operator.equals("*")) {
+			// find the product of the operands
+		} else if (operator.equals("%")) {
+			// find the quotiant of the two operands			
+		}
+	
+    	return "";
+    }
+    
+    /**
+     * Describes the whole number, numerator, and denominator of input
+     * @method: describeOperand
+     * @param input		a string fraction or mixed fraction (e.g. 1/4 or 1_1/4)
+     * @return whole number, numerator, and denominator 
+     */
+    public static int[] describeOperand(String input) {	
+
 		int whole = 0;
 		int numerator = 0;
 		int denominator = 0;
@@ -82,17 +108,13 @@ public class FracCalc {
 			denominator = 1;
 		}
 		
-		// wrap the values in a tight little cozy container
-		// ...with a little bow on top
 		int[] result = new int[3];
 		result[0] = whole;
 		result[1] = numerator;
 		result[2] = denominator;
 		
-//		return result;
-		return "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
+		return result;
     }
 
-    // TODO: Fill in the space below with any helper methods that you think you will need
     
 }
