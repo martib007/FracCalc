@@ -6,11 +6,11 @@ public class FracCalc {
 
     public static void main(String[] args) 
     {
-    	//reads input statement of the user
+    	// reads input statement of the user
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
-		//continues to read user statements until user says quit
+		// continues to read user statements until user says quit
 		while (!statement.equals("quit"))
 		{
 			String answer = produceAnswer(statement);
@@ -40,7 +40,7 @@ public class FracCalc {
     
     public static String produceAnswer(String input)
     { 
-		//ex. 1/4 + 1_1/2 => ["1/4", "+", "1_1/2"]
+		// ex. 1/4 + 1_1/2 => ["1/4", "+", "1_1/2"]
 		String[] splitInput = input.split(" ");
 		
 		String operandOne = splitInput[0]; // 1/4
@@ -60,25 +60,92 @@ public class FracCalc {
      * @return
      */
     
-    public static String calculateEquation(String operandOne, String operator, String operandTwo) {
-    	
+    public static String calculateEquation(String operandOne, String operator, String operandTwo) 
+    {   	
     	// parsed operands, from string to parsed values
 		int[] operandOneDescribed = describeOperand(operandOne);
 		int[] operandTwoDescribed = describeOperand(operandTwo);
 		
+		//defining of variables used
+    	int whole = 0;
+    	int numerator1 = operandOneDescribed[1];
+    	int denominator1 = operandOneDescribed[2];
+    	int numerator2 = operandTwoDescribed[1];
+    	int denominator2 = operandTwoDescribed[2];
+    	int numeratorFinal = 0;
+    	int denominatorFinal = 0;
+    	String fraction = "";
+    	String result = "";
+    	
 		// support the 4 basic arithmetic operations: 
 		// add (+), subtract (-), multiply (*), and divide (/).
-		if (operator.equals("+")) {
-			// sum up the operands
-		} else if (operator.equals("-")) {
-			// find the difference between the operands
-		} else if (operator.equals("*")) {
-			// find the product of the operands
-		} else if (operator.equals("/")) {
-			// find the quotient of the two operands			
+		if (operator.equals("+")) // sum of the operands
+		{
+			 // combination of whole numbers
+			whole = operandOneDescribed[0] + operandTwoDescribed[0];
+			 // proper evaluation of numeratorFinal and denominatorFinal
+			numeratorFinal = (denominator2 * numerator1) + (denominator1 * numerator2);
+			denominatorFinal = denominator1 * denominator2;
+			 //checking/evaluation of fraction based on improperness, value, etc.
+			if (numeratorFinal == 0) // the fraction is equal to 0
+			{
+				numeratorFinal = 0;
+		    	denominatorFinal = 0;
+				fraction = "";
+			}
+			else if (numeratorFinal == denominatorFinal) // the fraction is equal to 1
+			{
+				whole++;
+				numeratorFinal = 0;
+		    	denominatorFinal = 0;
+				fraction = "";
+			}
+			else if (numeratorFinal > denominatorFinal) // the fraction is improper
+			{
+				if (numeratorFinal % denominatorFinal == 0) // the fraction is perfectly divisible
+				{
+					int temp = numeratorFinal / denominatorFinal;
+					whole = whole + temp;
+					numeratorFinal = 0;
+			    	denominatorFinal = 0;
+					fraction = "";
+				}
+				else // the fraction is not perfectly divisible ()
+				{
+					int temp = numeratorFinal / denominatorFinal;
+					whole = whole + temp;
+					numeratorFinal = numeratorFinal % denominatorFinal;
+					fraction = numeratorFinal + "/" + denominatorFinal;
+				}
+			}
+			else // the fraction is proper
+			{
+				fraction = numeratorFinal + "/" + denominatorFinal;
+			}
+			
 		}
-	
-    	return "";
+		else if (operator.equals("-")) // difference of the operands
+		{
+				
+		}
+		else if (operator.equals("*")) // product of the operands
+		{
+			
+		} 
+		else if (operator.equals("/")) // quotient of the operands	
+		{
+			
+		}
+		
+		if (fraction.equals("") || numeratorFinal == 0)
+		{
+			return whole + "";
+		}
+		else 
+		{
+			return whole + "_" + fraction;
+		}
+		
     }
     
     /**
@@ -96,27 +163,27 @@ public class FracCalc {
 		
 		if (input.contains("_"))// calculates a mixed fraction
 		{
-			//ex. 5_3/4 => ["5", "3/4"]
+			// ex. 5_3/4 => ["5", "3/4"]
 			String[] splitOperand = input.split("_");
 			String[] operandFraction = splitOperand[1].split("/");
-			whole = Integer.parseInt(splitOperand[0]);
-			numerator = Integer.parseInt(operandFraction[0]);
-			denominator = Integer.parseInt(operandFraction[1]);
+			whole = Integer.parseInt(splitOperand[0]); // 5
+			numerator = Integer.parseInt(operandFraction[0]); // 3
+			denominator = Integer.parseInt(operandFraction[1]); // 4
 		}
-		else if (input.contains("/"))//calculates a fraction
+		else if (input.contains("/"))// calculates a fraction
 		{
-			//ex. "3/4" => ["3", "4"]
+			// ex. "3/4" => ["3", "4"]
 			String[] operandFraction = input.split("/");
-			whole = 0;
-			numerator = Integer.parseInt(operandFraction[0]);
-			denominator = Integer.parseInt(operandFraction[1]);
+			whole = 0; // 0
+			numerator = Integer.parseInt(operandFraction[0]); // 3
+			denominator = Integer.parseInt(operandFraction[1]); // 4
 		}
-		else//cacluates a whole number
+		else// cacluates a whole number
 		{
-			//ex. 5 => [5]
-			whole = Integer.parseInt(input);
-			numerator = 0;
-			denominator = 1;
+			// ex. 5 => [5]
+			whole = Integer.parseInt(input); // 5
+			numerator = 0; // 0
+			denominator = 1; // 1
 		}
 		
 		int[] result = new int[3];
