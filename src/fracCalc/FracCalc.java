@@ -116,7 +116,7 @@ public class FracCalc {
 				denominatorFinal = Math.abs(denominatorFinal);
 				fraction = "";
 			}
-			else if (numeratorFinal > denominatorFinal) // the fraction is improper
+			else if (Math.abs(numeratorFinal) > Math.abs(denominatorFinal)) // the fraction is improper
 			{
 				if (numeratorFinal % denominatorFinal == 0) // the fraction is perfectly divisible
 				{
